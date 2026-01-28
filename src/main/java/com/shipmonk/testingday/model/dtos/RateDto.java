@@ -11,8 +11,6 @@ import java.util.Map;
 @Getter
 public class RateDto {
 
-    private boolean success;
-
     @NotBlank
     private String date;
 

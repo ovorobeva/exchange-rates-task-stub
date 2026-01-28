@@ -1,4 +1,4 @@
-package com.shipmonk.testingday;
+package com.shipmonk.testingday.configuration;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

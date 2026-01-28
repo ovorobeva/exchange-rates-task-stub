@@ -12,6 +12,6 @@ import java.time.LocalDate;
 @FeignClient(name = "fixerClient", url = "${fixer.api-url}")
 public interface FixerClient {
 
-    @GetMapping("/latest")
-    ResponseEntity<RateDto> getRates(@RequestParam String access_key, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate date);
+    @GetMapping("/{date}")
+    ResponseEntity<RateDto> getRates(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate date, @RequestParam String access_key);
 }
