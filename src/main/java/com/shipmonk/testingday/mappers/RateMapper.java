@@ -23,7 +23,7 @@ public interface RateMapper {
         return rateDto;
     }
 
-    default Map<String, Double> mapRatesListToMap(List<RateEntity> rateEntities) {
+    default Map<String, Double> mapRatesListToMap(final List<RateEntity> rateEntities) {
         return rateEntities
             .stream()
             .collect(Collectors
