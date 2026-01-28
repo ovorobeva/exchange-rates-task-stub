@@ -2,13 +2,13 @@ package com.shipmonk.testingday.controller;
 
 import com.shipmonk.testingday.model.dtos.RateDto;
 import com.shipmonk.testingday.service.RateService;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.joda.money.CurrencyUnit;
 
 import java.time.LocalDate;
 
@@ -20,15 +20,17 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class ExchangeRatesController{
 
-    final RateService rateService;
+    final private RateService rateService;
 
     @GetMapping(value = {"/{day}", "/{day}/{currency}"})
-    public ResponseEntity<RateDto> getRates(@PathVariable String day, @PathVariable(required = false) CurrencyUnit currency)
+    public ResponseEntity<RateDto> getRates(@PathVariable String day,
+                                            @PathVariable(required = false)
+                                            @Pattern(regexp = "[a-zA-Z][a-zA-Z][a-zA-Z]") String currency)
     {
         if (currency == null) {
-            currency = CurrencyUnit.USD;
+            currency = "USD";
         }
 
-        return ResponseEntity.ok().body(rateService.getRates(LocalDate.parse(day), currency));
+        return rateService.getRates(LocalDate.parse(day), currency);
     }
 }
