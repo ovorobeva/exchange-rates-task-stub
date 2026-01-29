@@ -5,18 +5,15 @@ import com.shipmonk.testingday.service.RateService;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+//todo: create openapi and readme documentation
 
 @RestController
 @RequestMapping(
     path = "/api/v1/rates"
 )
-//todo: config openapi
 @RequiredArgsConstructor
 public class ExchangeRatesController{
 
@@ -24,7 +21,7 @@ public class ExchangeRatesController{
 
     @GetMapping(value = {"/{day}", "/{day}/{currency}"})
     public ResponseEntity<RateDto> getRates(@PathVariable String day,
-                                            @PathVariable(required = false)
+                                            @RequestParam(required = false)
                                             @Pattern(regexp = "[a-zA-Z][a-zA-Z][a-zA-Z]") String currency)
     {
         if (currency == null) {
